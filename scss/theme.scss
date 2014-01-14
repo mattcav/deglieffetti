@@ -1,0 +1,31 @@
+.visual-shop {
+    background-image: url('../images/deglieffetti_2m.jpg');
+    background-repeat: no-repeat;
+    background-position:center center;
+    background-size:cover;
+}
+
+.bg-black {
+    background:$black;
+    color:$white;
+}
+
+.bg-black__title {
+    color:$white;
+}
+
+.bg-black__link {
+        color:$darkYellow;
+        &:hover, &:active {
+            color:$yellow;
+            text-decoration: underline;
+        }
+}
+
+.bg-black__button {
+    color:$white;
+    &:hover, &:active {
+        color:$lightGrey;
+        text-decoration: none;
+    }
+}

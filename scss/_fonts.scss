@@ -1,0 +1,14 @@
+@import url("http://cloud.typography.com/708968/719302/css/fonts.css");
+
+.sentinel {font-family: 'Sentinel SSm A', 'Sentinel SSm B'; font-weight: 400; font-style: normal;}
+.sentinelitalic { font-family: 'Sentinel SSm A', 'Sentinel SSm B'; font-weight: 400; font-style: italic; }
+
+.verlag-light {
+    font-family: 'Verlag A', 'Verlag B'; font-weight: 300; font-style: normal;
+}
+.verlag-book {
+    @extend .verlag-light; font-weight: 400;
+}
+.verlag-bold {
+    @extend .verlag-light; font-weight: 700;
+}

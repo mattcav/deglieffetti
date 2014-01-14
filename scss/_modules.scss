@@ -1,0 +1,227 @@
+
+// logo
+.logo {
+    @extend .text-center;
+    @extend .bg-black;
+}
+.logo__title {
+    margin:0;
+    line-height: 1.4;
+}
+
+// boutique
+.boutique {
+    @extend %section-padding;
+}
+
+.boutique__container {
+    max-width:37em;
+    @include grid-column(
+    $columns:12,
+    $collapse:true,
+    $center:true
+    );
+
+    @media #{$large-up} {
+    max-width: 100%;
+    }
+}
+
+.boutique__inner {
+    @include grid-column(
+    $columns:12
+    );
+
+    @media #{$large-up} {
+       @include grid-column(
+        $columns:5
+        ); 
+    }
+}
+
+.boutique__title {
+    @extend .bg-black__title;
+}
+.boutique__column {
+    margin-top:1em;
+    @include grid-column(
+    $columns:12,
+    $collapse:true
+    );
+
+    @media #{$medium-up} {
+       @include grid-column(
+        $columns:6,
+        $collapse:true
+        ); 
+    }
+}
+
+.boutique__column-title {
+    font-size:rem-calc(23);
+}
+
+.boutique__visual {
+    @include grid-column(
+    $columns:12
+    );
+
+    @media #{$large-up} {
+        @include grid-column(
+        $columns:7
+        );
+        margin-top:1.2em;
+    }
+}
+
+// social
+
+.social__title {
+    @extend .text-center;
+    @extend .bg-black__title;
+    margin-bottom:1.5em;
+}
+
+
+
+//insta photo 
+.insta-pic {
+    position:relative;
+    @extend %w100;
+    max-width: 20em;
+    margin:0 auto;
+    //@extend .photo-hover;
+}
+.insta-pic__img {
+    @extend %w100;
+}
+.insta-pic__caption {
+    @extend .text-center;
+    @extend %w100;
+    font-style:italic;
+    line-height: 1.2;
+    padding: 0.5em 1em;
+    color:$lightGrey;
+}
+
+
+// social buttons
+.social__buttons {
+    margin:0;
+    @extend .text-center;
+}
+
+.social-button__link {
+    @extend .text-center;
+        
+    border: 1px solid #FEFEFE;
+    color: $white;
+    padding: 0.5em 1em;
+    font-style: italic;
+    
+    display:block;
+    margin:0 1em;
+
+    &:hover, &:active {
+        background:$white;
+        color:$black;
+    }
+    @media #{$medium-up} {
+        display:inline;
+    }
+}
+
+// magazine 
+.magazine {
+    @extend .section-padding;
+}
+.magazine__title {
+    @extend .text-center;
+    margin-bottom:1.5em;
+}
+
+//home-mag
+.home-mag {
+    clear:both;
+    overflow: hidden;
+    @include grid-column(
+        $columns:12,
+        $center:true
+    );
+    @media #{$large-up} {
+         @include grid-column(
+            $columns:10,
+            $center:true
+        );
+    }
+}
+
+.home-mag__img {
+   @include grid-column(
+        $columns:12,
+        $collapse:true
+    );
+    @media #{$large-up} {
+         @include grid-column(
+            $columns:6
+        );
+    }
+}
+
+.home-mag__desc {
+     @include grid-column(
+        $columns:12,
+        $collapse:true
+    );
+    @media #{$large-up} {
+         @include grid-column(
+            $columns:6
+        );
+    }
+    padding-top:1em;
+
+    @media #{$large-up} {
+        padding-top:10%;
+    }
+}
+
+.home-mag__title {
+    @extend .verlag-light;
+    font-size:rem-calc(27);
+}
+.home-mag__opening {
+    font-size:rem-calc(18);
+}
+
+// focus-on
+.focus-on {
+    @include grid-column(
+    $columns:12,
+    $center:true
+    );
+
+    @media #{$large-up} {
+         @include grid-column(
+            $columns:10
+        );
+    }
+}
+
+.focus-on__link {
+    background-image: url("../images/paul-harnden/cover-image.jpg");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 75%;
+    max-height: 25em;
+    position: relative;
+    width: 100%;
+    display:block;
+}
+
+.focus-on__title {
+    padding: 30% 0;
+    color:$white;
+    @extend .text-center;
+    margin-bottom:1em;
+}
