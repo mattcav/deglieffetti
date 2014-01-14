@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 *.DS_Store
 /css/*
 /bower_components/*
 /node_modules/*
+=======
+.sass-cache
+>>>>>>> 4ae983232fcc01f44f2fba500a2afa44969cea78
