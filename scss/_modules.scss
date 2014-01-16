@@ -1,12 +1,23 @@
 
 // logo
+.banner {
+    @extend .bg-black;
+}
 .logo {
     @extend .text-center;
-    @extend .bg-black;
 }
 .logo__title {
     margin:0;
     line-height: 1.4;
+}
+
+// home-visual
+.home-visual {
+    @extend .bg-black;
+    @extend .text-center;
+}
+.home-visual__img {
+   @extend %w-100;
 }
 
 // boutique
@@ -59,6 +70,11 @@
 
 .boutique__column-title {
     font-size:rem-calc(23);
+    @extend .bg-black__title;
+}
+
+.boutique__link {
+    color:$darkGrey;
 }
 
 .boutique__visual {
@@ -72,6 +88,10 @@
         );
         margin-top:1.2em;
     }
+}
+
+.boutique__img {
+   @extend %w100; 
 }
 
 // social
@@ -102,6 +122,7 @@
     line-height: 1.2;
     padding: 0.5em 1em;
     color:$lightGrey;
+    font-size:rem-calc(12);
 }
 
 
@@ -127,6 +148,11 @@
         color:$black;
     }
     @media #{$medium-up} {
+        max-width: 30em;
+        margin:0 auto;
+    }
+
+    @media #{$large-up} {
         display:inline;
     }
 }
@@ -137,7 +163,7 @@
 }
 .magazine__title {
     @extend .text-center;
-    margin-bottom:1.5em;
+    margin-bottom:1.5rem;
 }
 
 //home-mag
@@ -151,7 +177,8 @@
     @media #{$large-up} {
          @include grid-column(
             $columns:10,
-            $center:true
+            $center:true,
+            $collapse:true
         );
     }
 }
@@ -187,7 +214,7 @@
 
 .home-mag__title {
     @extend .verlag-light;
-    font-size:rem-calc(27);
+    font-size:rem-calc(37);
 }
 .home-mag__opening {
     font-size:rem-calc(18);
@@ -217,11 +244,607 @@
     position: relative;
     width: 100%;
     display:block;
+    margin-bottom:1em;
+    padding:25% 10%;
+
+    @media #{$large-up} {
+        padding:15% 10%;
+        margin-bottom:2em;
+    }
 }
 
 .focus-on__title {
-    padding: 30% 0;
     color:$white;
     @extend .text-center;
+}
+
+// designers home
+.designers {
+    @extend .bg-pearl;
+}
+.designers__title {
+    @extend .text-center;
+    @extend .magazine__title;
+}
+.designers__inner {
+    @include grid-column(
+    $columns:12,
+    $center:true,
+    $collapse:true
+    );
+}
+.tabs--designers {
+    border-bottom:3px solid $darkYellow;
+    padding-left:1em;
+}
+.tabs--designers dd > a {
+    padding: 0.75em 1.5em 0.8125em;
+    margin-right:0.5em;
+}
+
+.content--designers {
+    @extend %w100;
+}
+.designers-columns {
+    margin:0;
+    @extend %w100;
+    -webkit-column-count:2;
+    -moz-column-count:2; 
+    column-count:2; 
+
+    -webkit-column-gap:15px;
+    -moz-column-gap:15px;
+    column-gap:15px;
+
+    -webkit-column-rule: 1px dotted $lightGrey;
+    -moz-column-rule: 1px dotted $lightGrey;
+    column-rule: 1px dotted $lightGrey;
+
+    @media #{$medium-up} {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+
+    @media #{$large-up} {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+
+    li {
+        font-size:rem-calc(13px);
+        line-height:2.5em;
+        text-align:center;
+        list-style: none;
+        
+        @media #{$medium-up} {
+            text-align: left;
+            padding-left: 2em;
+        }
+        @media #{$large-up} {
+            font-size:1rem;
+        }
+    }
+
+    a {
+        color:$darkGrey;
+        &:hover, &:focus, &:active {
+            color:$lightYellow;
+        }
+    }
+}
+
+// footer
+.footer {
+    @extend .bg-black;
+    float: left;
+    padding: 0.5em;
+    width: 100%;
+}
+
+.footer__inner {
+    @extend .text-center;
+    @include grid-column(
+    $columns:12,
+    $center:true
+    );
+}
+
+.footer__text {
+    margin:0;
+    padding:0;
+}
+
+// popup 
+.mfp-info {
+    padding-bottom: 0.5em;
+    padding-top: 0.6em;
+    background:$yellow;
+    color:$black;
+    cursor:pointer;
+    letter-spacing: 1px;
+    
+    @media #{$large-up} {
+      margin-top:0.5em;
+    }
+}
+
+.contact-modal {
+    @extend .bg-pearl;
+}
+
+
+// single magazine
+.single-magazine {
+    padding-bottom:3em;
+    overflow: hidden;
+}
+
+.single-magazine__figure {
+    margin:0;
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    @media #{$medium-up} {
+        height: 400px;
+    }
+    @media #{$large-up} {
+        height: 50vh;
+    }
+}
+
+.single-magazine__img {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+// entry content
+.entry-content {
+    margin-top:3em;
+    max-width:36rem;
+    @include grid-column(
+    $columns:12,
+    $center:true
+    );
+
+    @media #{$large-up} {
+        @include grid-column(
+        $columns:8,
+        $center:true
+        );
+    }
+}
+
+
+.entry-content__meta {
+    color:$darkGrey;
+    font-style:italic;
+    margin-bottom: 1em;
+    font-size:rem-calc(23);
+    margin-top:0.2em;
+}
+
+.entry-content__title {
+    font-weight: 100;
+    @extend %hyphens;
+    @extend .verlag-light;
+    font-size:3.25em;
+    line-height: 1;
+    margin:0.2em 0 0.5em;
+}
+
+
+.gallery {
+    //small-12 large-8 columns
+    width:100%;
+    overflow:auto;
+    margin:1em 0 3em;
+}
+
+.slider {
+    width:100%;
+    overflow-y: hidden;
+    @media #{$medium-up}  {
+        width:150%;
+    }
+}
+
+.slider__panel {
+    width:100%;
+    float:left;
+    list-style:none;
+    padding: 0.5em;
+
+    @media #{$medium-up} {
+        width:25%;
+    }
+}
+
+.slider__img {
+    display: block;
+    margin: 0 0;
+}
+
+.slider__caption {
+    text-align: center;
+    font-size: 1em;
+    font-style: italic;
+}   
+
+// paul harnden
+
+.ph-designer-header {
+    position: absolute;
+    top: 38%;
+    width: 100%;
+    z-index: 999;
+}
+.ph-designer-title {
+    color: $white;
+    margin-bottom:1rem;
+    margin-top:2rem;
+    @extend .text-center;
+    @media #{$large-up} {
+        font-size: 7em;
+    }
+}
+
+.ph-designer-subtitle {
+    color:$white;
+    @extend .text-center;
+    @media #{$medium-up} {
+        font-size:1.375em;
+    }
+
+    @media #{$large-up} {
+        font-size:2.3125em;
+    }
+}
+
+.ph-attract {
+    position:relative;
+    
+    width:100%;
+    height:75%;
+    max-height:25em;
+
+    background-image: url('../images/paul-harnden/cover-image.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    @media #{$large-up} {
+        max-height:75vh;
+    }
+}
+
+.ph-interest {
+    @extend .bg-black;
+    position:relative;
+}
+
+.ph-interest__container {
+    //max-height: 95vh;
+    overflow: hidden;
+    background:$black;
+    max-height:80em;
+    @media #{$medium-up} {
+        max-height:55em;
+    }
+}
+
+.ph-interest__img {
+    width:50%;
+        @media #{$medium-up} {
+            width:25%
+        }
+}
+
+.ph-interest__text {
+    @include grid-column(
+        $columns:11,
+        $collapse:true,
+        $center:true
+    );
+
+    background:$white;
+    color:$black;
+    position:absolute;
+    top:5%;
+    margin:0 1em;
+    padding:3em 1em;
+    z-index:99;
+
+    border:1px solid $darkGrey;
+
+        @media #{$medium-up} {
+            padding:3em;
+        }
+
+        @media #{$large-up} {
+            width:50%;
+            right:0;
+            top:64.5%;
+            margin:0;
+        }
+
+        @media #{$xlarge-up} {
+            width:33.333%;
+            top:45%;
+            right:10%;
+        }
+
+        @media #{$xxlarge-up} {
+            width:33.333%;
+            top:45%;
+            right:8%;
+        }
+}
+
+.ph-interest__title {
+    @extend .verlag-light;
+    line-height: 1;
+}
+
+.ph-desire {
+    @extend .bg-black;
+    width:100%;
+    overflow-x: hidden;
+    padding:3em 0;
+}
+.ph-desire__title {
+    @extend .bg-black__title;
+    margin-bottom: 2em;
+    text-align:center;
+    @media #{$large-up} {
+        text-align: left;
+        max-width:10em;
+    }
+}
+
+.ph-desire__img {
+    @extend %w100;
+}
+
+
+.ph-desire__grid {
+
+    @include block-grid(
+    $per-row: 2,
+    $spacing: $block-grid-default-spacing,
+    $base-style: true
+    );
+    li {
+        @media #{$large-up} {
+            max-width: 25%;
+        }
+    }
+    > li:nth-of-type(3) {
+        width:100%;
+        padding:0 0 1.25em;
+
+        @media #{$large-up} {
+            clear:none;
+            padding:0 0.625em 1.25em;
+        }
+    }
+
+    > li:nth-of-type(2n+1) {
+        clear:none;
+        @media #{$large-up} {
+            clear:both;
+        }
+    }
+
+    li:nth-of-type(7) {
+        @media #{$large-up} {
+            max-width: 50%; 
+            clear: right; 
+            position: relative; 
+            margin-top: -25%;
+        }
+    }
+}
+
+.ph-action {
+    padding:5em 0 0;
+    overflow: hidden;
+    @extend .bg-black;
+
+    @media #{$large-up} {
+        padding:10em 0 0;
+    }
+}
+
+.ph-action__title {
+    @extend .bg-black__title;
+    margin-bottom:2em;
+    text-align: center;
+}
+
+// postcard
+.postcard {
+    @extend .bg-pearl;
+    float:none;
+    overflow: hidden;
+    max-width: 64rem;
+    margin:0 auto 5em;
+
+    @media #{$medium-up} {
+        margin:0 auto 10em;
+        padding:3em;
+        margin:0 1em;
+    }
+
+    @media #{$large-up} {
+        margin:0 auto 10em;
+    }
+}
+
+.postcard__logo {
+    max-height: 1em;
+}
+
+.postcard__link {
+    color:$darkYellow;
+}
+
+.postcard__section {
+    @include grid-column(
+        $columns:12
+    );
+}
+.postcard__left {
+    font-style:italic;
+    @media #{$medium-up} {
+        border-right:1px solid #ddd;
+        @include grid-column(
+            $columns:7
+        );
+    }
+}
+.postcard__right {
+    margin-top:2.6em;
+    @media #{$medium-up} {
+        @include grid-column(
+            $columns:4
+        );
+        float:right;
+    }
+}
+
+.postcard__link {
+        color:$darkYellow;
+        &:hover {
+            color:$yellow;
+        }
+    }
+
+// CCP
+.postid-60 {
+    overflow-x: hidden
+}
+.ccp-attract {
+    background-image:url('../images/ccp/ccp.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left center;
+    padding-bottom:10em;
+}
+
+.ccp-attract__title {
+    font-family: 'Verlag A', 'Verlag B'; 
+    font-weight: 700; 
+    font-size:3em;
+    font-style: normal;
+    text-transform: uppercase;
+    text-align: center;
+    line-height:1.5;
+    margin-top:0;
+    @media #{$large-up} {
+        font-size:15em;
+    }
+    color:$white;
+}
+
+.ccp-attract__subtitle {
+    color:$white;
+    @extend .text-center;
+    @media #{$large-up} {
+        font-size:4em;
+    }
+}
+
+.ccp-container  {
+    @include grid-column(
+            $columns:12
+    );
+
+    background:#000;
+    color:#fff;
+    top: -5em;
+    padding: 0;
+    z-index:999;
+
+    @media #{$large-up} {
+        width: 115%;
+        margin:0 -6%;
+        transform: rotate(-5deg);
+    }
+}
+
+.ccp-interest {
+    @extend .bg-pearl;
+    padding: 2em;
+    max-width: 34em;
+    //small-12 large-5 columns
+    @include grid-column(
+            $columns:12
+        );
+
+    @media #{$medium-up} {
+        padding:3em;
+    }
+
+    @media #{$large-up} {
+        margin: 13em 0 0;
+        @include grid-column(
+                $columns:5,
+                $center:false
+            );
+    }
+
+    p+p {
+        text-indent:1em;
+    }
+}
+
+.ccp-interest__title {
+    font-size: rem-calc(27);
+    margin-bottom: 1.5em;
+    padding-left: 0.5em;
+}
+
+.ccp-desire {
+    margin:3em 0;
+     @include grid-column(
+            $columns:12
+        );
+     //small-12 large-6 columns
+
+     @media #{$large-up} {
+        @include grid-column(
+            $columns:6
+        );
+        float:right;
+     }
+}
+
+.ccp-desire__title {
+    text-align:center;
+    color:#fff;
+    margin-top:3em;
     margin-bottom:1em;
+}
+
+.ccp-desire__grid {
+     @include block-grid(
+    $per-row: 2,
+    $spacing: $block-grid-default-spacing,
+    $base-style: true
+    );
+}
+.ccp-action {
+    @extend .bg-pearl;
+}
+.ccp-action__title {
+    text-align: center;
+}
+.postcard_left--ccp {
+    @media #{$large-up} {
+        padding-right: 5em;
+    }
 }

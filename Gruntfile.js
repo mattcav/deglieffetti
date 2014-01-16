@@ -15,13 +15,6 @@ module.exports = function(grunt) {
         }        
       }
     },
-    connect: {
-      server: {
-        options: {
-          port: 9001,
-        }
-      }
-    },
 
      autoprefixer: {
         single_file: {
@@ -38,28 +31,20 @@ module.exports = function(grunt) {
               src: [
                   'bower_components/jquery/jquery.js', 
                   'bower_components/foundation/js/foundation.min.js',
+                  'bower_components/foundation/js/foundation/foundation.reveal.js',
+                  'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
                   'js/app.js' 
               ],
               dest: 'js/build/app.js'
           }
       },
+
       uglify: {
           build: {
               src: 'js/build/app.js',
               dest: 'js/build/app.min.js'
           }
       },
-    // imagemin: {
-    //       dynamic: {
-    //           files: [{
-    //               expand: true,
-    //               cwd: 'images/',
-    //               src: ['**/*.{png,jpg,gif}'],
-    //               dest: 'images/build/'
-    //           }]
-    //       }
-    //   },
-
 
 
     watch: {
@@ -67,26 +52,23 @@ module.exports = function(grunt) {
 
       sass: {
         files: 'scss/**/*.scss',
-        tasks: ['sass']
+        tasks: ['sass', 'autoprefixer']
       },
 
-      autoprefixer: {
-        files: 'css/app.css',
-        tasks: ['autoprefixer'],
-        options: {
-          livereload: true,
-        },
+      concat: {
+        files: 'js/*.js',
+        tasks: ['concat', 'uglify']
       }
+
     }
   });
 
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('build', ['sass', 'autoprefixer', 'connect', 'concat', 'uglify']);
+  grunt.registerTask('build', ['sass', 'autoprefixer', 'concat', 'uglify']);
   grunt.registerTask('default', ['build','watch']);
 }

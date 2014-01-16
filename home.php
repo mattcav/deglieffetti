@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
 <!-- visual -->
-<?php //get_template_part('home', 'visual'); ?>
-<?php get_template_part('component', 'header'); ?>      
+<?php get_template_part('component', 'header'); ?>  
+<?php get_template_part('home', 'visual'); ?>    
 
 <main role="main" class="main">
 
@@ -12,9 +12,9 @@
 
     <?php get_template_part('home', 'magazine'); ?>
 
-    <?php //get_template_part('home', 'designers'); ?>
+    <?php get_template_part('home', 'designers'); ?>
 
-    <?php //get_template_part('component', 'footer'); ?>      
+    <?php get_template_part('component', 'footer'); ?>      
 
 </main>
 

@@ -1,13 +1,22 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>to be checked</title>
-    <link rel="stylesheet" href="css/app.css" />
-    <script src="bower_components/modernizr/modernizr.js"></script>
-  </head>
-  <body>
-    index
-  </body>
-</html>
+<?php get_header(); ?>
+
+<!-- visual -->
+<?php get_template_part('component', 'header'); ?>  
+<?php get_template_part('home', 'visual'); ?>    
+
+<main role="main" class="main">
+
+    <?php get_template_part('home', 'boutique'); ?>
+
+    <?php get_template_part('home', 'instagram'); ?>
+
+    <?php get_template_part('home', 'magazine'); ?>
+
+    <?php get_template_part('home', 'designers'); ?>
+
+    <?php get_template_part('component', 'footer'); ?>      
+
+</main>
+
+
+<?php get_footer(); ?>

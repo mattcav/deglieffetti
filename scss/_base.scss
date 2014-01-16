@@ -5,3 +5,10 @@
 html, body {
     height:100%;
 }
+
+a {
+    color:$yellow;
+    &:hover, &:focus, &:active {
+        color:$darkYellow;
+    }
+}

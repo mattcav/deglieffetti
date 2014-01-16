@@ -10,20 +10,20 @@
                     <section class="boutique__column">
                         <h3 class="boutique__column-title">boutique man</h3>
                         <p>79, Piazza Capranica <br> Rome Italy <br>
-                        <a href="mailto:man@deglieffetti.eu">man@deglieffetti.eu</a><br>
+                        <a class="boutique__link" href="mailto:man@deglieffetti.eu">man@deglieffetti.eu</a><br>
                         +39 06 6791650</p>
                     </section>
 
                     <section class="boutique__column">
                         <h3 class="boutique__column-title">boutique woman</h3>
                         <p>93, Piazza Capranica <br> Rome Italy <br>
-                        <a href="mailto:woman@deglieffetti.eu">woman@deglieffetti.eu</a><br>
+                        <a class="boutique__link" href="mailto:woman@deglieffetti.eu">woman@deglieffetti.eu</a><br>
                         +39 06 6790202</p>
                     </section>
                 </div>  
 
                 <div class="boutique__visual">
-                    <img src="<?php bloginfo('template_directory'); ?>/images/boutique_3.jpg" alt="Degli Effetti" class="full-width">
+                    <img src="<?php bloginfo('template_directory'); ?>/images/boutique_3.jpg" alt="Degli Effetti" class="boutique__img">
                 </div>
         </article>
     </div>
