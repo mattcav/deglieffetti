@@ -2,22 +2,42 @@
 // logo
 .banner {
     @extend .bg-black;
+    @media #{$large-up} {
+        position:absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        z-index:10;
+    }
 }
 .logo {
-    @extend .text-center;
+    text-align:center;
+    @media #{$large-up} {
+        text-align:left;
+        @include grid-column(
+        $columns:3
+        );
+    }
 }
 .logo__title {
     margin:0;
     line-height: 1.4;
 }
 
+.top-container {
+    position:relative;
+}
+
 // home-visual
 .home-visual {
     @extend .bg-black;
     @extend .text-center;
+    max-height:100vh;
+    overflow: hidden;
 }
 .home-visual__img {
    @extend %w-100;
+   position:relative;
 }
 
 // boutique
@@ -52,6 +72,9 @@
 
 .boutique__title {
     @extend .bg-black__title;
+    @extend .verlag-book;
+    line-height: 1;
+    margin-bottom:0.5em;
 }
 .boutique__column {
     margin-top:1em;
@@ -71,6 +94,7 @@
 .boutique__column-title {
     font-size:rem-calc(23);
     @extend .bg-black__title;
+    font-weight:300;
 }
 
 .boutique__link {
@@ -99,6 +123,8 @@
 .social__title {
     @extend .text-center;
     @extend .bg-black__title;
+    @extend .verlag-bold;
+    text-transform: uppercase;
     margin-bottom:1.5em;
 }
 
@@ -118,6 +144,7 @@
 .insta-pic__caption {
     @extend .text-center;
     @extend %w100;
+    display:block;
     font-style:italic;
     line-height: 1.2;
     padding: 0.5em 1em;
@@ -847,4 +874,63 @@
     @media #{$large-up} {
         padding-right: 5em;
     }
+}
+// offcanvas
+
+.offcanvas-menu {
+    margin-left:0;
+}
+.offcanvas-menu__item {
+    list-style: none;
+    border-bottom:1px solid $black;
+    @extend .verlag-light;
+    text-transform: uppercase;
+}
+
+.offcanvas-menu__link {
+    color:$white;
+    display:block;
+    padding:1em;
+}
+
+a.menu-icon {
+    position:absolute;
+    left:0;
+    top:0;
+    @media #{$large-up} {
+        display:none;
+    }
+
+    span {
+        @media #{$medium-up} {
+            top:1rem;
+        }
+    }
+}
+
+// nav
+.top-menu {
+    @media #{$large-up} {
+        @include grid-column(
+        $columns:9,
+        $last-column:true,
+        $float:right
+        );
+    }
+}
+.visible-menu {
+    @include inline-list;
+    display:none;
+    float:right;
+    margin:1.0625rem 0 1.0625rem -1.375rem;
+    @media #{$large-up} {
+        display:block;
+    }
+}
+
+.visible-menu__link {
+    color:$pearl;
+    padding-top:5px;
+    @extend .verlag-light;
+    text-transform: uppercase;
 }

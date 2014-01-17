@@ -98,7 +98,33 @@ $(document).ready(function() {
         };
      }); // on click
 
-// end documentReady
+  jQuery.extend(verge);
+  var win = $(window);
+  var allMods = $(".coming");
+
+  win.scroll(function(event) {
+    allMods.each(function(i, el) {   
+      var el = $(el);   
+      //if (el.visible(true)) {
+      if($.inViewport(el)) {  
+        el.addClass("come-in");
+        } 
+    });
+  });
+
+
+//parallax
+  $(window).scroll(function() {
+    // if(Modernizr.touch)
+    //   return;
+    var scroll = $(window).scrollTop();
+    var scroll1 = scroll + 5000;
+    console.log(scroll1);
+    var visual = $('#home-visual__img');
+    visual.css("transform","translateY(" +  (scroll/2.3)  + "px) scale(" +  scroll1/5000  + ")");
+  });   
+
+
   $('body').on('click', '.mfp-info', function () {            
         $.magnificPopup.close();
         title = $('.mfp-title').html();
@@ -110,10 +136,11 @@ $(document).ready(function() {
             }
             ,300);
     });
+
+// end documentReady  
 });
 
 
-  //$('#contact-modal').foundation('reveal', 'open');
    
 
 

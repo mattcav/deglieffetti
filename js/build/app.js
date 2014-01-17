@@ -9179,6 +9179,310 @@ return b.length>0?b:"replace"},object:function(a){var b=this.parse_data_attr(a),
   };
 }(jQuery, this, this.document));
 
+;(function ($, window, document, undefined) {
+  'use strict';
+
+  Foundation.libs.interchange = {
+    name : 'interchange',
+
+    version : '5.0.0',
+
+    cache : {},
+
+    images_loaded : false,
+    nodes_loaded : false,
+
+    settings : {
+      load_attr : 'interchange',
+
+      named_queries : {
+        'default' : Foundation.media_queries.small,
+        small : Foundation.media_queries.small,
+        medium : Foundation.media_queries.medium,
+        large : Foundation.media_queries.large,
+        xlarge : Foundation.media_queries.xlarge,
+        xxlarge: Foundation.media_queries.xxlarge,
+        landscape : 'only screen and (orientation: landscape)',
+        portrait : 'only screen and (orientation: portrait)',
+        retina : 'only screen and (-webkit-min-device-pixel-ratio: 2),' + 
+          'only screen and (min--moz-device-pixel-ratio: 2),' + 
+          'only screen and (-o-min-device-pixel-ratio: 2/1),' + 
+          'only screen and (min-device-pixel-ratio: 2),' + 
+          'only screen and (min-resolution: 192dpi),' + 
+          'only screen and (min-resolution: 2dppx)'
+      },
+
+      directives : {
+        replace: function (el, path, trigger) {
+          // The trigger argument, if called within the directive, fires
+          // an event named after the directive on the element, passing
+          // any parameters along to the event that you pass to trigger.
+          //
+          // ex. trigger(), trigger([a, b, c]), or trigger(a, b, c)
+          //
+          // This allows you to bind a callback like so:
+          // $('#interchangeContainer').on('replace', function (e, a, b, c) {
+          //   console.log($(this).html(), a, b, c);
+          // });
+
+          if (/IMG/.test(el[0].nodeName)) {
+            var orig_path = el[0].src;
+
+            if (new RegExp(path, 'i').test(orig_path)) return;
+
+            el[0].src = path;
+
+            return trigger(el[0].src);
+          }
+          var last_path = el.data('interchange-last-path');
+
+          if (last_path == path) return;
+
+          return $.get(path, function (response) {
+            el.html(response);
+            el.data('interchange-last-path', path);
+            trigger();
+          });
+
+        }
+      }
+    },
+
+    init : function (scope, method, options) {
+      Foundation.inherit(this, 'throttle');
+
+      this.data_attr = 'data-' + this.settings.load_attr;
+
+      this.bindings(method, options);
+      this.load('images');
+      this.load('nodes');
+    },
+
+    events : function () {
+      var self = this;
+
+      $(window)
+        .off('.interchange')
+        .on('resize.fndtn.interchange', self.throttle(function () {
+          self.resize.call(self);
+        }, 50));
+
+      return this;
+    },
+
+    resize : function () {
+      var cache = this.cache;
+
+      if(!this.images_loaded || !this.nodes_loaded) {
+        setTimeout($.proxy(this.resize, this), 50);
+        return;
+      }
+
+      for (var uuid in cache) {
+        if (cache.hasOwnProperty(uuid)) {
+          var passed = this.results(uuid, cache[uuid]);
+
+          if (passed) {
+            this.settings.directives[passed
+              .scenario[1]](passed.el, passed.scenario[0], function () {
+                if (arguments[0] instanceof Array) { 
+                  var args = arguments[0];
+                } else { 
+                  var args = Array.prototype.slice.call(arguments, 0);
+                }
+
+                passed.el.trigger(passed.scenario[1], args);
+              });
+          }
+        }
+      }
+
+    },
+
+    results : function (uuid, scenarios) {
+      var count = scenarios.length;
+
+      if (count > 0) {
+        var el = this.S('[data-uuid="' + uuid + '"]');
+
+        for (var i = count - 1; i >= 0; i--) {
+          var mq, rule = scenarios[i][2];
+          if (this.settings.named_queries.hasOwnProperty(rule)) {
+            mq = matchMedia(this.settings.named_queries[rule]);
+          } else {
+            mq = matchMedia(rule);
+          }
+          if (mq.matches) {
+            return {el: el, scenario: scenarios[i]};
+          }
+        }
+      }
+
+      return false;
+    },
+
+    load : function (type, force_update) {
+      if (typeof this['cached_' + type] === 'undefined' || force_update) {
+        this['update_' + type]();
+      }
+
+      return this['cached_' + type];
+    },
+
+    update_images : function () {
+      var images = this.S('img[' + this.data_attr + ']'),
+          count = images.length,
+          loaded_count = 0,
+          data_attr = this.data_attr;
+
+      this.cache = {};
+      this.cached_images = [];
+      this.images_loaded = (count === 0);
+
+      for (var i = count - 1; i >= 0; i--) {
+        loaded_count++;
+        if (images[i]) {
+          var str = images[i].getAttribute(data_attr) || '';
+
+          if (str.length > 0) {
+            this.cached_images.push(images[i]);
+          }
+        }
+
+        if(loaded_count === count) {
+          this.images_loaded = true;
+          this.enhance('images');
+        }
+      }
+
+      return this;
+    },
+
+    update_nodes : function () {
+      var nodes = this.S('[' + this.data_attr + ']:not(img)'),
+          count = nodes.length,
+          loaded_count = 0,
+          data_attr = this.data_attr;
+
+      this.cached_nodes = [];
+      // Set nodes_loaded to true if there are no nodes
+      // this.nodes_loaded = false;
+      this.nodes_loaded = (count === 0);
+
+
+      for (var i = count - 1; i >= 0; i--) {
+        loaded_count++;
+        var str = nodes[i].getAttribute(data_attr) || '';
+
+        if (str.length > 0) {
+          this.cached_nodes.push(nodes[i]);
+        }
+
+        if(loaded_count === count) {
+          this.nodes_loaded = true;
+          this.enhance('nodes');
+        }
+      }
+
+      return this;
+    },
+
+    enhance : function (type) {
+      var count = this['cached_' + type].length;
+
+      for (var i = count - 1; i >= 0; i--) {
+        this.object($(this['cached_' + type][i]));
+      }
+
+      return $(window).trigger('resize');
+    },
+
+    parse_params : function (path, directive, mq) {
+      return [this.trim(path), this.convert_directive(directive), this.trim(mq)];
+    },
+
+    convert_directive : function (directive) {
+      var trimmed = this.trim(directive);
+
+      if (trimmed.length > 0) {
+        return trimmed;
+      }
+
+      return 'replace';
+    },
+
+    object : function(el) {
+      var raw_arr = this.parse_data_attr(el),
+          scenarios = [], count = raw_arr.length;
+
+      if (count > 0) {
+        for (var i = count - 1; i >= 0; i--) {
+          var split = raw_arr[i].split(/\((.*?)(\))$/);
+
+          if (split.length > 1) {
+            var cached_split = split[0].split(','),
+                params = this.parse_params(cached_split[0],
+                  cached_split[1], split[1]);
+
+            scenarios.push(params);
+          }
+        }
+      }
+
+      return this.store(el, scenarios);
+    },
+
+    uuid : function (separator) {
+      var delim = separator || "-";
+
+      function S4() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+      }
+
+      return (S4() + S4() + delim + S4() + delim + S4()
+        + delim + S4() + delim + S4() + S4() + S4());
+    },
+
+    store : function (el, scenarios) {
+      var uuid = this.uuid(),
+          current_uuid = el.data('uuid');
+
+      if (current_uuid) return this.cache[current_uuid];
+
+      el.attr('data-uuid', uuid);
+
+      return this.cache[uuid] = scenarios;
+    },
+
+    trim : function(str) {
+      if (typeof str === 'string') {
+        return $.trim(str);
+      }
+
+      return str;
+    },
+
+    parse_data_attr : function (el) {
+      var raw = el.data(this.settings.load_attr).split(/\[(.*?)\]/),
+          count = raw.length, output = [];
+
+      for (var i = count - 1; i >= 0; i--) {
+        if (raw[i].replace(/[\W\d]+/, '').length > 4) {
+          output.push(raw[i]);
+        }
+      }
+
+      return output;
+    },
+
+    reflow : function () {
+      this.load('images', true);
+      this.load('nodes', true);
+    }
+
+  };
+
+}(jQuery, this, this.document));
 /*! Magnific Popup - v0.9.9 - 2013-11-15
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2013 Dmitry Semenov; */
@@ -11221,6 +11525,490 @@ $.magnificPopup.registerModule(RETINA_NS, {
 
 /*>>fastclick*/
  _checkInstance(); })(window.jQuery || window.Zepto);
+/*!
+ * verge 1.8.3+201312102220
+ * https://github.com/ryanve/verge
+ * MIT License 2013 Ryan Van Etten
+ */
+
+(function(root, name, make) {
+    if (typeof module != 'undefined' && module['exports']) module['exports'] = make();
+    else root[name] = make();
+}(this, 'verge', function() {
+
+    var xports = {} 
+      , win = typeof window != 'undefined' && window
+      , doc = typeof document != 'undefined' && document
+      , docElem = doc && doc.documentElement
+      , Modernizr = win['Modernizr']
+      , matchMedia = win['matchMedia'] || win['msMatchMedia']
+      , mq = matchMedia ? function(q) {
+            return !!matchMedia.call(win, q).matches;
+        } : function() {
+            return false;
+        }
+        // http://ryanve.com/lab/dimensions
+        // http://github.com/ryanve/verge/issues/7
+      , viewportW = docElem['clientWidth'] < win['innerWidth'] ? function() {
+            return win['innerWidth'];
+        } : function() {
+            return docElem['clientWidth'];
+        }
+      , viewportH = docElem['clientHeight'] < win['innerHeight'] ? function() {
+            return win['innerHeight'];
+        } : function() {
+            return docElem['clientHeight'];
+        };
+    
+    /** 
+     * Test if a media query is active. (Fallback uses Modernizr if avail.)
+     * @since 1.6.0
+     * @return {boolean}
+     */    
+    xports['mq'] = !matchMedia && Modernizr && Modernizr['mq'] || mq;
+
+    /** 
+     * Normalized, gracefully-degrading matchMedia.
+     * @since 1.6.0
+     * @return {Object}
+     */ 
+    xports['matchMedia'] = matchMedia ? function() {
+        // matchMedia must be binded to window
+        return matchMedia.apply(win, arguments);
+    } : function() {
+        return {};
+    };
+
+    /** 
+     * Get the layout viewport width.
+     * @since 1.0.0
+     * @return {number}
+     */
+    xports['viewportW'] = viewportW;
+
+    /** 
+     * Get the layout viewport height.
+     * @since 1.0.0
+     * @return {number}
+     */
+    xports['viewportH'] = viewportH;
+    
+    /**
+     * alternate syntax for getting viewport dims
+     * @since 1.8.0
+     * @return {Object}
+     */
+    function viewport() {
+        return {'width':viewportW(), 'height':viewportH()};
+    }
+    xports['viewport'] = viewport;
+    
+    /** 
+     * Cross-browser window.scrollX
+     * @since 1.0.0
+     * @return {number}
+     */
+    xports['scrollX'] = function() {
+        return win.pageXOffset || docElem.scrollLeft; 
+    };
+
+    /** 
+     * Cross-browser window.scrollY
+     * @since 1.0.0
+     * @return {number}
+     */
+    xports['scrollY'] = function() {
+        return win.pageYOffset || docElem.scrollTop; 
+    };
+
+    /**
+     * @param {{top:number, right:number, bottom:number, left:number}} coords
+     * @param {number=} cushion adjustment
+     * @return {Object}
+     */
+    function calibrate(coords, cushion) {
+        var o = {};
+        cushion = +cushion || 0;
+        o['width'] = (o['right'] = coords['right'] + cushion) - (o['left'] = coords['left'] - cushion);
+        o['height'] = (o['bottom'] = coords['bottom'] + cushion) - (o['top'] = coords['top'] - cushion);
+        return o;
+    }
+
+    /**
+     * Cross-browser element.getBoundingClientRect plus optional cushion.
+     * Coords are relative to the top-left corner of the viewport.
+     * @since 1.0.0
+     * @param {Element|Object} el element or stack (uses first item)
+     * @param {number=} cushion +/- pixel adjustment amount
+     * @return {Object|boolean}
+     */
+    function rectangle(el, cushion) {
+        el = el && !el.nodeType ? el[0] : el;
+        if (!el || 1 !== el.nodeType) return false;
+        return calibrate(el.getBoundingClientRect(), cushion);
+    }
+    xports['rectangle'] = rectangle;
+
+    /**
+     * Get the viewport aspect ratio (or the aspect ratio of an object or element)
+     * @since 1.7.0
+     * @param {(Element|Object)=} o optional object with width/height props or methods
+     * @return {number}
+     * @link http://w3.org/TR/css3-mediaqueries/#orientation
+     */
+    function aspect(o) {
+        o = null == o ? viewport() : 1 === o.nodeType ? rectangle(o) : o;
+        var h = o['height'], w = o['width'];
+        h = typeof h == 'function' ? h.call(o) : h;
+        w = typeof w == 'function' ? w.call(o) : w;
+        return w/h;
+    }
+    xports['aspect'] = aspect;
+
+    /**
+     * Test if an element is in the same x-axis section as the viewport.
+     * @since 1.0.0
+     * @param {Element|Object} el
+     * @param {number=} cushion
+     * @return {boolean}
+     */
+    xports['inX'] = function(el, cushion) {
+        var r = rectangle(el, cushion);
+        return !!r && r.right >= 0 && r.left <= viewportW();
+    };
+
+    /**
+     * Test if an element is in the same y-axis section as the viewport.
+     * @since 1.0.0
+     * @param {Element|Object} el
+     * @param {number=} cushion
+     * @return {boolean}
+     */
+    xports['inY'] = function(el, cushion) {
+        var r = rectangle(el, cushion);
+        return !!r && r.bottom >= 0 && r.top <= viewportH();
+    };
+
+    /**
+     * Test if an element is in the viewport.
+     * @since 1.0.0
+     * @param {Element|Object} el
+     * @param {number=} cushion
+     * @return {boolean}
+     */
+    xports['inViewport'] = function(el, cushion) {
+        // Equiv to `inX(el, cushion) && inY(el, cushion)` but just manually do both 
+        // to avoid calling rectangle() twice. It gzips just as small like this.
+        var r = rectangle(el, cushion);
+        return !!r && r.bottom >= 0 && r.right >= 0 && r.top <= viewportH() && r.left <= viewportW();
+    };
+
+    return xports;
+}));
+/*
+ * Copyright (c) 2012 Adobe Systems Incorporated. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. *
+ */
+/**
+ * jquery.balancetext.js
+ *
+ * Author: Randy Edmunds
+ */
+
+/*jslint vars: true, plusplus: true, devel: true, browser: true, nomen: true, indent: 4, maxerr: 50 */
+/*global jQuery, $ */
+
+(function ($) {
+    "use strict";
+
+    var style = document.documentElement.style,
+        hasTextWrap = (style.textWrap || style.WebkitTextWrap || style.MozTextWrap || style.MsTextWrap || style.OTextWrap);
+
+    function NextWS_params() {
+        this.reset();
+    }
+    NextWS_params.prototype.reset = function () {
+        this.index = 0;
+        this.width = 0;
+    };
+
+    /**
+     * Returns true iff c is an HTML space character.
+     */
+    var isWS = function (c) {
+        return Boolean(c.match(/^\s$/));
+    };
+
+    var removeTags = function ($el) {
+        $el.find('br[data-owner="balance-text"]').replaceWith(document.createTextNode(" "));
+        var $span = $el.find('span[data-owner="balance-text"]');
+        if ($span.length > 0) {
+            var txt = "";
+            $span.each(function () {
+                txt += $(this).text();
+                $(this).remove();
+            });
+            $el.html(txt);
+        }
+    };
+
+    /**
+     * Checks to see if we should justify the balanced text with the 
+     * element based on the textAlign property in the computed CSS
+     * 
+     * @param $el        - $(element)
+     */
+    var isJustified = function ($el) {
+        style = $el.get(0).currentStyle || window.getComputedStyle($el.get(0), null);
+        return (style.textAlign === 'justify');
+    };
+
+    /**
+     * Add whitespace after words in text to justify the string to
+     * the specified size.
+     * 
+     * @param txt      - text string
+     * @param conWidth - container width
+     */
+    var justify = function ($el, txt, conWidth) {
+        txt = $.trim(txt);
+        var words = txt.split(' ').length;
+        txt = txt + ' ';
+
+        // if we don't have at least 2 words, no need to justify.
+        if (words < 2) {
+            return txt;
+        }
+
+        // Find width of text in the DOM
+        var tmp = $('<span></span>').html(txt);
+        $el.append(tmp);
+        var size = tmp.width();
+        tmp.remove();
+
+        // Figure out our word spacing and return the element
+        var wordSpacing = Math.floor((conWidth - size) / (words - 1));
+        tmp.css('word-spacing', wordSpacing + 'px')
+            .attr('data-owner', 'balance-text');
+
+        return $('<div></div>').append(tmp).html();
+    };
+
+    /**
+     * In the current simple implementation, an index i is a break
+     * opportunity in txt iff it is 0, txt.length, or the
+     * index of a non-whitespace char immediately preceded by a
+     * whitespace char.  (Thus, it doesn't honour 'white-space' or
+     * any Unicode line-breaking classes.)
+     *
+     * @precondition 0 <= index && index <= txt.length
+     */
+    var isBreakOpportunity = function (txt, index) {
+        return ((index === 0) || (index === txt.length) ||
+                (isWS(txt.charAt(index - 1)) && !isWS(txt.charAt(index))));
+    };
+
+    /**
+     * Finds the first break opportunity (@see isBreakOpportunity)
+     * in txt that's both after-or-equal-to index c in the direction dir
+     * and resulting in line width equal to or past clamp(desWidth,
+     * 0, conWidth) in direction dir.  Sets ret.index and ret.width
+     * to the corresponding index and line width (from the start of
+     * txt to ret.index).
+     *
+     * @param $el      - $(element)
+     * @param txt      - text string
+     * @param conWidth - container width
+     * @param desWidth - desired width
+     * @param dir      - direction (-1 or +1)
+     * @param c        - char index (0 <= c && c <= txt.length)
+     * @param ret      - return object; index and width of previous/next break
+     *
+     */
+    var findBreakOpportunity = function ($el, txt, conWidth, desWidth, dir, c, ret) {
+        var w;
+
+        for(;;) {
+            while (!isBreakOpportunity(txt, c)) {
+                c += dir;
+            }
+
+            $el.text(txt.substr(0, c));
+            w = $el.width();
+
+            if ((dir < 0)
+                    ? ((w <= desWidth) || (w <= 0) || (c === 0))
+                    : ((desWidth <= w) || (conWidth <= w) || (c === txt.length))) {
+                break;
+            }
+            c += dir;
+        }
+        ret.index = c;
+        ret.width = w;
+    };
+
+    $.fn.balanceText = function () {
+        if (hasTextWrap) {
+            // browser supports text-wrap, so do nothing
+            return this;
+        }
+
+        return this.each(function () {
+            var $this = $(this);
+
+            // In a lower level language, this algorithm takes time
+            // comparable to normal text layout other than the fact
+            // that we do two passes instead of one, so we should
+            // be able to do without this limit.
+            var maxTextWidth = 5000;
+
+            removeTags($this);                        // strip balance-text tags
+
+            // save line-height if set via inline style
+            var oldLH = '';
+            if ($this.attr('style') &&
+                    $this.attr('style').indexOf('line-height') >= 0) {
+                oldLH = $this.css('line-height');
+            }
+
+            // remove line height before measuring container size
+            $this.css('line-height', 'normal');
+
+            var containerWidth = $this.width();
+            var containerHeight = $this.height();
+
+            // save settings
+            var oldWS = $this.css('white-space');
+            var oldFloat = $this.css('float');
+            var oldDisplay = $this.css('display');
+            var oldPosition = $this.css('position');
+
+            // temporary settings
+            $this.css({
+                'white-space': 'nowrap',
+                'float': 'none',
+                'display': 'inline',
+                'position': 'static'
+            });
+
+            var nowrapWidth = $this.width();
+            var nowrapHeight = $this.height();
+
+            // An estimate of the average line width reduction due
+            // to trimming trailing space that we expect over all
+            // lines other than the last.
+            var guessSpaceWidth = ((oldWS === 'pre-wrap') ? 0 : nowrapHeight / 4);
+
+            if (containerWidth > 0 &&                  // prevent divide by zero
+                    nowrapWidth > containerWidth &&    // text is more than 1 line
+                    nowrapWidth < maxTextWidth) {      // text is less than arbitrary limit (make this a param?)
+
+                var remainingText = $this.text();
+                var newText = "";
+                var lineText = "";
+                var shouldJustify = isJustified($this);
+                var totLines = Math.round(containerHeight / nowrapHeight);
+                var remLines = totLines;
+
+                // Determine where to break:
+                while (remLines > 1) {
+
+                    var desiredWidth = Math.round((nowrapWidth + guessSpaceWidth)
+                                                  / remLines
+                                                  - guessSpaceWidth);
+
+                    // Guessed char index
+                    var guessIndex = Math.round((remainingText.length + 1) / remLines) - 1;
+
+                    var le = new NextWS_params();
+
+                    // Find a breaking space somewhere before (or equal to) desired width,
+                    // not necessarily the closest to the desired width.
+                    findBreakOpportunity($this, remainingText, containerWidth, desiredWidth, -1, guessIndex, le);
+
+                    // Find first breaking char after (or equal to) desired width.
+                    var ge = new NextWS_params();
+                    guessIndex = le.index;
+                    findBreakOpportunity($this, remainingText, containerWidth, desiredWidth, +1, guessIndex, ge);
+
+                    // Find first breaking char before (or equal to) desired width.
+                    le.reset();
+                    guessIndex = ge.index;
+                    findBreakOpportunity($this, remainingText, containerWidth, desiredWidth, -1, guessIndex, le);
+
+                    // Find closest string to desired length
+                    var splitIndex;
+                    if (le.index === 0) {
+                        splitIndex = ge.index;
+                    } else if ((containerWidth < ge.width) || (le.index === ge.index)) {
+                        splitIndex = le.index;
+                    } else {
+                        splitIndex = ((Math.abs(desiredWidth - le.width) < Math.abs(ge.width - desiredWidth))
+                                           ? le.index
+                                           : ge.index);
+                    }
+
+                    // Break string
+                    lineText = remainingText.substr(0, splitIndex);
+                    if (shouldJustify) {
+                        newText += justify($this, lineText, containerWidth);
+                    } else {
+                        newText += lineText.trimRight();
+                        newText += '<br data-owner="balance-text" />';
+                    }
+                    remainingText = remainingText.substr(splitIndex);
+
+                    // update counters
+                    remLines--;
+                    $this.text(remainingText);
+                    nowrapWidth = $this.width();
+                }
+
+                if (shouldJustify) {
+                    $this.html(newText + justify($this, remainingText, containerWidth));
+                } else {
+                    $this.html(newText + remainingText);
+                }
+            }
+
+            // restore settings
+            $this.css({
+                'position': oldPosition,
+                'display': oldDisplay,
+                'float': oldFloat,
+                'white-space': oldWS,
+                'line-height': oldLH
+            });
+        });
+    };
+
+
+    // Call the balanceText plugin on the elements with "balance-text" class. When a browser
+    // has native support for the text-wrap property, the text balanceText plugin will let
+    // the browser handle it natively, otherwise it will apply its own text balancing code.
+    function applyBalanceText() {
+        $(".balance-text").balanceText();
+    }
+
+    // Apply on DOM ready
+    $(window).ready(applyBalanceText);
+
+    // Reapply on resize
+    $(window).resize(applyBalanceText);
+
+}(jQuery));
+
 $(document).foundation();
 
 $(document).ready(function() {
@@ -11321,7 +12109,33 @@ $(document).ready(function() {
         };
      }); // on click
 
-// end documentReady
+  jQuery.extend(verge);
+  var win = $(window);
+  var allMods = $(".coming");
+
+  win.scroll(function(event) {
+    allMods.each(function(i, el) {   
+      var el = $(el);   
+      //if (el.visible(true)) {
+      if($.inViewport(el)) {  
+        el.addClass("come-in");
+        } 
+    });
+  });
+
+
+//parallax
+  $(window).scroll(function() {
+    // if(Modernizr.touch)
+    //   return;
+    var scroll = $(window).scrollTop();
+    var scroll1 = scroll + 5000;
+    console.log(scroll1);
+    var visual = $('#home-visual__img');
+    visual.css("transform","translateY(" +  (scroll/2.3)  + "px) scale(" +  scroll1/5000  + ")");
+  });   
+
+
   $('body').on('click', '.mfp-info', function () {            
         $.magnificPopup.close();
         title = $('.mfp-title').html();
@@ -11333,10 +12147,11 @@ $(document).ready(function() {
             }
             ,300);
     });
+
+// end documentReady  
 });
 
 
-  //$('#contact-modal').foundation('reveal', 'open');
    
 
 

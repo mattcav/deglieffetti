@@ -1,8 +1,10 @@
 <?php get_header(); ?>
 
 <!-- visual -->
-<?php get_template_part('component', 'header'); ?>  
-<?php get_template_part('home', 'visual'); ?>    
+<section class="top-container">
+    <?php get_template_part('component', 'header'); ?>  
+    <?php get_template_part('home', 'visual'); ?> 
+</section>   
 
 <main role="main" class="main">
 

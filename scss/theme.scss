@@ -1,3 +1,7 @@
+ .balance-text {
+        text-wrap: balanced;
+    }
+    
 .bg-image {
     background-image: url('../images/deglieffetti_2m.jpg');
     background-repeat: no-repeat;
@@ -53,4 +57,8 @@
         color:$white;
         text-decoration: none;
     }
+}
+
+.off-canvas-wrap {
+    background:#333;
 }

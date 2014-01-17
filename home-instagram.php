@@ -16,7 +16,7 @@
             $obj=(json_decode($result));
             if($obj->data) {
                 foreach ($obj->data as $data) {
-                    echo '<li class="insta-pic">';
+                    echo '<li class="insta-pic coming">';
                             echo "<a class='img-popup' title=\"{$data->caption->text}\" href=\"{$data->images->standard_resolution->url}\">";
 
                                 echo "<img class='insta-pic__img' alt=\"{$data->caption->text}\" src=\"{$data->images->low_resolution->url}\">";

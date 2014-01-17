@@ -2,6 +2,17 @@
     -webkit-overflow-scrolling: touch;
 }
 
+html {
+    font-size:80%;
+
+    @media #{$medium-up} {
+        font-size:90%
+    }
+    @media #{$large-up} {
+        font-size:100%
+    }
+}
+
 html, body {
     height:100%;
 }

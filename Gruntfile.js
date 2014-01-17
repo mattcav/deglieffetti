@@ -32,7 +32,10 @@ module.exports = function(grunt) {
                   'bower_components/jquery/jquery.js', 
                   'bower_components/foundation/js/foundation.min.js',
                   'bower_components/foundation/js/foundation/foundation.reveal.js',
+                  'bower_components/foundation/js/foundation/foundation.interchange.js',
                   'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
+                  'bower_components/verge/verge.js',
+                  'js/jquery.balancetext.js',
                   'js/app.js' 
               ],
               dest: 'js/build/app.js'
