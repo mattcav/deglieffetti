@@ -7,6 +7,10 @@ module.exports = {
         test
             .open('http://www.deglieffetti.eu/?theme=deglieffetti_v3')
             .assert.exists('#social', 'social section exists')
+            .execute(function () {
+                   $('.insta-pic').addClass('come-in');
+                 })
+            .wait(1000)
             .click('.insta-pic:first-child > a')
             .waitForElement('.mfp-wrap')
                 .assert.exists('.mfp-ready', 'magnific popup works')
@@ -26,7 +30,11 @@ module.exports = {
     'can fill the form & detect errors': function (test) {
             test
                 .open('http://www.deglieffetti.eu/?theme=deglieffetti_v3')
-                .click('.insta-pic:first-child > a')
+                .execute(function () {
+                   $('.insta-pic').addClass('come-in');
+                 })
+                .wait(1000)
+                .click('.insta-pic:nth-child(2) > a')
                 .waitForElement('.mfp-wrap')
                 .assert.exists('.mfp-ready', 'magnific popup works')
                 .wait(1000)
