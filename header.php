@@ -20,6 +20,6 @@
     </head>
 
     <body <?php body_class(); ?>>
-    <div class="off-canvas-wrap">
-        <div class="inner-wrap">
+        <div class="off-canvas-wrap">
+            <div class="inner-wrap">
 

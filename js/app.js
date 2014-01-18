@@ -119,27 +119,46 @@ $(document).ready(function() {
     //   return;
     var scroll = $(window).scrollTop();
     var scroll1 = scroll + 5000;
-    console.log(scroll1);
+    //console.log(scroll1);
     var visual = $('#home-visual__img');
     visual.css("transform","translateY(" +  (scroll/2.3)  + "px) scale(" +  scroll1/5000  + ")");
   });   
 
+// end documentReady  
+});
 
-  $('body').on('click', '.mfp-info', function () {            
+ $('body').on('click', '.mfp-info', function () {            
         $.magnificPopup.close();
         title = $('.mfp-title').html();
         //console.log(title);
         $('#mfp-title').val(title); 
         setTimeout(
             function(){
-                $('#contact-modal').foundation('reveal', 'open');
+              $('#contact-modal').data('reveal-init', {
+                  animation: 'fadeAndPop',
+                  animation_speed: 250,
+                  close_on_background_click: false,
+                  close_on_esc: false,
+                  dismiss_modal_class: 'close-reveal-modal',
+                  bg_class: 'reveal-modal-bg',
+                  bg : $('.reveal-modal-bg'),
+                  css : {
+                      open : {
+                          'opacity': 0,
+                          'visibility': 'visible',
+                          'display' : 'block'
+                      },
+                      close : {
+                          'opacity': 1,
+                          'visibility': 'hidden',
+                          'display': 'none'
+                      }
+                  }
+              });
+              $('#contact-modal').foundation('reveal', 'open');
             }
             ,300);
-    });
-
-// end documentReady  
-});
-
+    }); 
 
    
 

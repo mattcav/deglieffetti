@@ -6,7 +6,7 @@
     <?php get_template_part('home', 'visual'); ?> 
 </section>   
 
-<main role="main" class="main">
+<section role="main" class="main">
 
     <?php get_template_part('home', 'boutique'); ?>
 
@@ -16,9 +16,10 @@
 
     <?php get_template_part('home', 'designers'); ?>
 
+</section>
+    
     <?php get_template_part('component', 'footer'); ?>      
 
-</main>
 
 
 <?php get_footer(); ?>

@@ -5,6 +5,7 @@
                 </div>
             </div>
         </footer>
+        
     </div> <!-- inner-wrap -->
 </div> <!-- off-canvas-wrap -->
 
