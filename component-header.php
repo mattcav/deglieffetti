@@ -14,19 +14,19 @@
         <nav class="top-menu">
             <ul class="visible-menu">
                 <li class="visible-menu__item">
-                    <a class="visible-menu__link" href="#">the boutique</a>
+                    <a class="scroll visible-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#boutique">the boutique</a>
                 </li>
                 <li class="visible-menu__item">
-                    <a class="visible-menu__link" href="#">latest arrivals</a>
+                    <a class="scroll visible-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#social">latest arrivals</a>
                 </li>
                 <li class="visible-menu__item">
-                    <a class="visible-menu__link" href="#">magazine</a>
+                    <a class="scroll visible-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#magazine">magazine</a>
                 </li>
                 <li class="visible-menu__item">
-                    <a class="visible-menu__link" href="#">shop online</a>
+                    <a class="scroll visible-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#designers">shop online</a>
                 </li>
                 <li class="visible-menu__item">
-                    <a class="visible-menu__link" href="#">contact us</a>
+                    <a class="visible-menu__link" href="<?php bloginfo('url')?>/contact-us/">contact us</a>
                 </li>
             </ul>
         </nav>

@@ -2,7 +2,7 @@
 <aside class="left-off-canvas-menu">
     <ul class="offcanvas-menu">
         <li class="offcanvas-menu__item">
-            <a class="offcanvas-menu__link" href="#">the boutique</a>
+            <a class="scroll-mobile offcanvas-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#boutique">the boutique</a>
         </li>
         <li class="offcanvas-menu__item">
             <a class="offcanvas-menu__link" href="#">latest arrivals</a>

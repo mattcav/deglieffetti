@@ -1,3 +1,4 @@
+.no-touch {
     .insta-pic__img {
         position: relative;
         z-index:10;
@@ -13,18 +14,18 @@
         background: $black;
         z-index: 5;
     }
-
     .insta-pic:hover {
         .insta-pic__img {
             transform: translateY(-30%);
         }
     }
+}
 
 
 .js {
     .coming.insta-pic {
             transform:translateY(350px) translateX(250px) rotate(15deg);
-            opacity:0;
+            opacity:1;
             transition: all 0.6s ease-in-out 0s;
         }
 
