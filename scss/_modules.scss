@@ -20,8 +20,11 @@
     }
 }
 .logo__title {
-    margin:0;
     line-height: 1.4;
+    margin:0em 0 0.2em;
+    @media #{$large-up} {
+        margin:0;
+    }
 }
 
 .top-container {
@@ -186,7 +189,8 @@
 
 // magazine 
 .magazine {
-    @extend .section-padding;
+    background:$white;
+    color:$black;
 }
 .magazine__title {
     @extend .text-center;
@@ -197,16 +201,19 @@
 .home-mag {
     clear:both;
     overflow: hidden;
+    max-width:34em;
     @include grid-column(
         $columns:12,
         $center:true
     );
     @media #{$large-up} {
-         @include grid-column(
+        max-width:100%;
+        @include grid-column(
             $columns:10,
             $center:true,
             $collapse:true
         );
+         margin:5em auto;
     }
 }
 
@@ -248,42 +255,73 @@
 }
 
 // focus-on
-.focus-on {
-    @include grid-column(
-    $columns:12,
-    $center:true
-    );
 
+.focus-section__title {
+    color:$white;
+    @extend .text-center;
+}
+.focus-on {
+    overflow: hidden;
+    position:relative;
+    background:$white;
+    max-width:30em;
+    margin: 3rem auto;
+    float:none;
     @media #{$large-up} {
-         @include grid-column(
-            $columns:10
-        );
+        max-width:100%;
+        margin:5rem 0;
     }
 }
-
-.focus-on__link {
-    background-image: url("../images/paul-harnden/cover-image.jpg");
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 75%;
-    max-height: 25em;
-    position: relative;
-    width: 100%;
-    display:block;
-    margin-bottom:1em;
-    padding:25% 10%;
-
+.focus-on__figure {
+    max-height:26rem;
+    overflow: hidden;
+    margin:0;
+    border: 1em solid #FFFFFF;
+    @include grid-column(
+        $columns:12
+    );
     @media #{$large-up} {
-        padding:15% 10%;
-        margin-bottom:2em;
+        @include grid-column(
+            $columns:8,
+            $collapse:true
+        ); 
+    }
+}
+.focus-on__header {
+    text-align: center;
+    @include grid-column(
+        $columns:12
+    );
+    @media #{$large-up} {
+        text-align: left;
+        @include grid-column(
+            $columns:4
+        ); 
+        position:absolute;
+        bottom:0;
+        right:0;
     }
 }
 
 .focus-on__title {
-    color:$white;
-    @extend .text-center;
+    font-size:rem-calc(27);
+    margin-bottom: 1em;
 }
+
+.focus-on:nth-child(2) {
+    .focus-on__figure {
+        @media #{$large-up} {
+            float:right;
+        }
+    }
+    .focus-on__header {
+         @media #{$large-up} {
+            right:auto;
+            text-align: right;
+        }
+    }
+}
+
 
 // designers home
 .designers {
@@ -695,6 +733,7 @@
     overflow: hidden;
     max-width: 64rem;
     margin:0 auto 5em;
+    padding:0 1em;
 
     @media #{$medium-up} {
         margin:0 auto 10em;

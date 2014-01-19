@@ -1,14 +1,14 @@
-<?php get_template_part('component', 'modal'); ?>
-    
-    <script src="<?php echo get_template_directory_uri(); ?>/js/build/app.min.js"></script>
-    <!-- <script src="<?php echo get_template_directory_uri(); ?>/bower_components/imagesloaded/imagesloaded.js"></script>  
-    <script src="<?php echo get_template_directory_uri(); ?>/bower_components/masonry/masonry.js"></script>   -->
+    <script src="<?php echo get_template_directory_uri(); ?>/bower_components/jquery/jquery.js" ></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/bower_components/foundation/js/foundation.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/bower_components/foundation/js/foundation/foundation.interchange.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script>  
     <script src="<?php echo get_template_directory_uri(); ?>/bower_components/masonry/masonry.pkgd.min.js"></script>  
     <script src="<?php echo get_template_directory_uri(); ?>/bower_components/fittext/fittext.js"></script>  
     <script src="<?php echo get_template_directory_uri(); ?>/js/nat-form.js"></script>  
 
     <script>
+    $(document).foundation();
+
         // masonry
         var container = document.querySelector('#ph-interest__inner');
         var msnry;

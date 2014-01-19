@@ -12,6 +12,8 @@
 
     <?php get_template_part('home', 'instagram'); ?>
 
+    <?php get_template_part('home', 'focus_on'); ?>
+
     <?php get_template_part('home', 'magazine'); ?>
 
     <?php get_template_part('home', 'designers'); ?>

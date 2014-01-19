@@ -1,9 +1,6 @@
 <section id="magazine" class="magazine section-padding">
     <div class="row">
         <h2 class="magazine__title">magazine</h2>
-
-        <?php get_template_part('home', 'focus_on'); ?>
-
         <?php       
             $args = array(
                 'posts_per_page' => '2',

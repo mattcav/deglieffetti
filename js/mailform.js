@@ -35,7 +35,7 @@
         function send(dataString){
           $.ajax({
             type: "POST",
-            url: "../wp-content/themes/deglieffetti_v3/mail.php",
+            url: "http://www.deglieffetti.eu/wp-content/themes/deglieffetti_v3/mail.php",
             data: dataString,
             success: function() {
               response.addClass('success');

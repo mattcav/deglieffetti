@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       },
 
       concat: {   
-          dist: {
+           homeJs: {
               src: [
                   'bower_components/jquery/jquery.js', 
                   'bower_components/foundation/js/foundation.min.js',
@@ -38,14 +38,31 @@ module.exports = function(grunt) {
                   'js/jquery.balancetext.js',
                   'js/app.js' 
               ],
-              dest: 'js/build/app.js'
-          }
+              dest: 'js/build/app.js',
+            },
+            ccpJs: {
+              src: [
+                  'bower_components/jquery/jquery.js', 
+                  'bower_components/foundation/js/foundation.min.js',
+                  'bower_components/foundation/js/foundation/foundation.interchange.js',
+                  'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
+                  'js/app.js' 
+              ],
+              dest: 'js/build/ccpApp.js',
+            }
       },
 
       uglify: {
-          build: {
-              src: 'js/build/app.js',
-              dest: 'js/build/app.min.js'
+          home: {
+            files: {
+              'js/build/app.min.js': ['js/build/app.js']
+            }
+          },
+
+          ccp: {
+            files: {
+              'js/build/ccpApp.min.js': ['js/build/ccpApp.js']
+            }
           }
       },
 

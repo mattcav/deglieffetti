@@ -1,24 +1,24 @@
 .no-touch {
-    .insta-pic__img {
-        position: relative;
-        z-index:10;
-        transition: all 0.3s ease-in-out 0s;
-    }
-    .insta-pic__caption {
-        position: absolute;
-        left:0;
-        right:0;
-        bottom:0;
-        font-size:1rem;
-        color:$white;
-        background: $black;
-        z-index: 5;
-    }
-    .insta-pic:hover {
-        .insta-pic__img {
-            transform: translateY(-30%);
-        }
-    }
+    // .insta-pic__img {
+    //     position: relative;
+    //     z-index:10;
+    //     transition: all 0.3s ease-in-out 0s;
+    // }
+    // .insta-pic__caption {
+    //     position: absolute;
+    //     left:0;
+    //     right:0;
+    //     bottom:0;
+    //     font-size:1rem;
+    //     color:$white;
+    //     background: $black;
+    //     z-index: 5;
+    // }
+    // .insta-pic:hover {
+    //     .insta-pic__img {
+    //         transform: translateY(-30%);
+    //     }
+    // }
 }
 
 
@@ -29,13 +29,12 @@
             transition: all 0.6s ease-in-out 0s;
         }
 
-        .coming.insta-pic:nth-child(odd) {
-            transform:translateY(350px) translateX(-250px) rotate(-15deg);
-            transition: all 0.8s ease-in-out 0s;
-        }
+    .coming.insta-pic:nth-child(odd) {
+        transform:translateY(350px) translateX(-250px) rotate(-15deg);
+        transition: all 0.8s ease-in-out 0s;
+    }
 
-        .come-in.insta-pic {
-            opacity:1;
-            transform:translateY(0) translateX(0) rotate(0deg) !important;
-        }
+    .come-in.insta-pic {opacity:1;
+        transform:translateY(0) translateX(0) rotate(0deg) !important;
+    }
 }

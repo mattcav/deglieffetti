@@ -51,7 +51,7 @@ $(document).ready(function() {
     allMods.each(function(i, el) {   
       var el = $(el);   
       //if (el.visible(true)) {
-      if($.inViewport(el)) {  
+      if($.inViewport(el, 300)) {  
         el.addClass("come-in");
         } 
     });
