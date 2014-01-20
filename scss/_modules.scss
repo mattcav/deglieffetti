@@ -537,6 +537,7 @@
 .slider {
     width:100%;
     overflow-y: hidden;
+    margin:0;
     @media #{$medium-up}  {
         width:150%;
     }
@@ -814,13 +815,67 @@
 .postid-60 {
     overflow-x: hidden
 }
+
+
 .ccp-attract {
-    background-image:url('../images/ccp/ccp.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left center;
     padding-bottom:10em;
 }
+
+.webp {
+     @media #{$small} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp.webp');
+        }
+    }
+
+    @media #{$medium} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp-medium.webp');
+        }
+    }
+
+    @media #{$large} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp-large.webp');
+        }
+    }
+
+    @media #{$xlarge-up} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp-xlarge.webp');
+        }
+    }
+}
+
+.no-webp {
+    @media #{$small} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp.jpg');
+        }
+    }
+
+    @media #{$medium} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp-medium.jpg');
+        }
+    }
+
+    @media #{$large} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp-large.jpg');
+        }
+    }
+
+    @media #{$xlarge-up} {
+        .ccp-attract {
+            background-image:url('../images/carol-christian-poell/ccp-xlarge.jpg');
+        }
+    }
+}
+
 
 .ccp-attract__title {
     font-family: 'Verlag A', 'Verlag B'; 

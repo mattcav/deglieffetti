@@ -27,43 +27,86 @@ module.exports = function(grunt) {
       },
 
       concat: {   
-           homeJs: {
+           homeApp: {
               src: [
                   'bower_components/jquery/jquery.js', 
                   'bower_components/foundation/js/foundation.min.js',
-                  'bower_components/foundation/js/foundation/foundation.reveal.js',
                   'bower_components/foundation/js/foundation/foundation.interchange.js',
                   'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
                   'bower_components/verge/verge.js',
+                  'js/smooth-scroll.js',
                   'js/jquery.balancetext.js',
-                  'js/app.js' 
+                  'js/mailform.js',
+                  'js/home-app.js',
+                  'js/analytics.js'
+              ],
+              dest: 'js/build/home-app.js',
+            },
+
+            app: {
+              src: [
+                  'bower_components/jquery/jquery.js', 
+                  'bower_components/foundation/js/foundation.min.js',
+                  'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
+                  'js/app.js',
+                  'js/analytics.js' 
               ],
               dest: 'js/build/app.js',
             },
-            ccpJs: {
+
+            ccpApp: {
+              src: [
+                  'bower_components/jquery/jquery.js', 
+                  'bower_components/foundation/js/foundation.min.js',
+                  'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
+                  'js/mailform.js',
+                  'js/app.js',
+                  'js/analytics.js' 
+              ],
+              dest: 'js/build/ccp-app.js',
+            },
+
+            phApp: {
               src: [
                   'bower_components/jquery/jquery.js', 
                   'bower_components/foundation/js/foundation.min.js',
                   'bower_components/foundation/js/foundation/foundation.interchange.js',
+                  'bower_components/imagesloaded/imagesloaded.pkgd.min.js',
+                  'bower_components/masonry/masonry.pkgd.min.js',
+                  'bower_components/fittext/fittext.js',
                   'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
-                  'js/app.js' 
+                  'js/nat-form.js',
+                  'js/ph-app.js',
+                  'js/analytics.js' 
               ],
-              dest: 'js/build/ccpApp.js',
-            }
+              dest: 'js/build/ph-app.js',
+            },
+
       },
 
       uglify: {
-          home: {
+         app: {
             files: {
               'js/build/app.min.js': ['js/build/app.js']
             }
-          },
-
+          }, 
+          home: {
+            files: {
+              'js/build/home-app.min.js': ['js/build/home-app.js']
+            }
+          }, 
           ccp: {
             files: {
-              'js/build/ccpApp.min.js': ['js/build/ccpApp.js']
+              'js/build/ccp-app.min.js': ['js/build/ccp-app.js']
+            }
+          },
+
+          ph: {
+            files: {
+              'js/build/ph-app.min.js': ['js/build/ph-app.js']
             }
           }
+
       },
 
 

@@ -15,7 +15,16 @@
                         <article class="focus-on">
                                 <a href="<?php the_permalink(); ?>">
                                     <figure class="focus-on__figure">
-                                        <?php the_post_thumbnail('focus-on__img'); ?>
+                                        <?php // the_post_thumbnail('focus-on__img'); ?>
+
+                                        <img alt="<?php the_title(); ?>" class="focus-on__img" 
+                                        data-interchange="[<?php bloginfo('template_directory'); ?>/images/<?php echo( basename(get_permalink()) ) ?>/home-cover-small.jpg, (default)], 
+                                           [<?php bloginfo('template_directory'); ?>/images/<?php echo( basename(get_permalink()) ) ?>/home-cover-medium.jpg, (medium)]
+                                           [<?php bloginfo('template_directory'); ?>/images/<?php echo( basename(get_permalink()) ) ?>/home-cover-medium.jpg, (large)]
+                                           [<?php bloginfo('template_directory'); ?>/images/<?php echo( basename(get_permalink()) ) ?>/home-cover-medium.jpg, (xlarge)]
+                                           "> 
+                                        <noscript><img alt="welcome to degli effetti" src="<?php bloginfo('template_directory'); ?>/images/<?php echo( basename(get_permalink()) ) ?>/home-cover-medium.jpg"></noscript>
+
                                     </figure>
                                     <header class="focus-on__header">
                                         <h1 class="focus-on__title"><?php the_title(); ?></h1>

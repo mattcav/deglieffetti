@@ -23,5 +23,4 @@
     <?php get_template_part('component', 'footer'); ?>      
 
 
-
-<?php get_footer(); ?>
+<?php get_template_part('footer', 'home'); ?>      

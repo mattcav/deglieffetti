@@ -4,15 +4,6 @@ $(document).ready(function() {
 
   $('body').addClass('ready');
 
-  // single gallery - to be checked!!!
-  if($( window ).width() > 768) {
-    var panels = $(".slider__panel"),
-        img_num = panels.length,
-        sliding_per = (100 / img_num);
-    sliding_width = sliding_per + '%';
-    panels.css('width', sliding_width);
-  }
-
   // img popup
   $('.img-popup').magnificPopup({ 
     type: 'image',
@@ -43,8 +34,43 @@ $(document).ready(function() {
       }
   });
 
+  jQuery.extend(verge);
 });
 
-   
 
+//parallax
+  $(window).scroll(function() {
+    if(Modernizr.touch)
+      return;
+    var scroll = $(window).scrollTop();
+    var scroll1 = scroll + 5000;
+    //console.log(scroll1);
+    var visual = $('#home-visual__img');
+    visual.css("transform","translateY(" +  (scroll/2.3)  + "px) scale(" +  scroll1/5000  + ")");
+  });   
+// open modal via reveal after click on .mfp-info
+ $('body').on('click', '.mfp-info', function () {            
+        $.magnificPopup.close();
+        var titleContainer = $('#mfp-title');
+        var title = $('.mfp-title').html();
+        var modal = $('#contact-modal');
+        //console.log(title);
+        titleContainer.val(title); 
+        setTimeout(function(){modal.foundation('reveal', 'open') },200);
+    }); 
+
+// init verge
+
+  var win = $(window);
+  var allMods = $(".coming");
+
+  win.scroll(function(event) {
+    allMods.each(function(i, el) {   
+      var el = $(el);   
+      //if (el.visible(true)) {
+      if($.inViewport(el)) {  
+        el.addClass("come-in");
+        } 
+    });
+  });
 

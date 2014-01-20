@@ -25,7 +25,7 @@
                 
                     <div class="home-mag__img">
                         <a href="<?php the_permalink(); ?>">
-                            <?php the_post_thumbnail('home-mag__thumb'); ?>
+                            <?php the_post_thumbnail('medium', array('class' => 'home-mag__thumb')); ?>
                         </a>
                     </div>
 
