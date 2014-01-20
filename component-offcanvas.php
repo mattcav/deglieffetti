@@ -2,19 +2,19 @@
 <aside class="left-off-canvas-menu">
     <ul class="offcanvas-menu">
         <li class="offcanvas-menu__item">
-            <a class="scroll-mobile offcanvas-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#boutique">the boutique</a>
+            <a class="offcanvas-menu__link" href="<?php bloginfo('url'); ?>/about/">the boutique</a>
         </li>
         <li class="offcanvas-menu__item">
-            <a class="offcanvas-menu__link" href="#">latest arrivals</a>
+            <a class="offcanvas-menu__link" href="<?php bloginfo('url'); ?>/latest-arrivals/">latest arrivals</a>
         </li>
         <li class="offcanvas-menu__item">
-            <a class="offcanvas-menu__link" href="#">magazine</a>
+            <a class="offcanvas-menu__link" href="<?php bloginfo('url'); ?>/magazine/">magazine</a>
         </li>
         <li class="offcanvas-menu__item">
-            <a class="offcanvas-menu__link" href="#">shop online</a>
+            <a class="offcanvas-menu__link" href="http://shop.deglieffetti.eu/">shop online</a>
         </li>
         <li class="offcanvas-menu__item">
-            <a class="offcanvas-menu__link" href="#">contact us</a>
+            <a class="offcanvas-menu__link" href="<?php bloginfo('url'); ?>/contact-us/">contact us</a>
         </li>
     </ul>
 </aside>

@@ -2,6 +2,8 @@
 // logo
 .banner {
     @extend .bg-black;
+}
+.banner--home {
     @media #{$large-up} {
         position:absolute;
         bottom:0;
@@ -21,7 +23,7 @@
 }
 .logo__title {
     line-height: 1.4;
-    margin:0em 0 0.2em;
+    margin:0.2em 0 0;
     @media #{$large-up} {
         margin:0;
     }
@@ -194,6 +196,8 @@
 }
 .magazine__title {
     @extend .text-center;
+    @extend .verlag-bold;
+    text-transform: uppercase;
     margin-bottom:1.5rem;
 }
 
@@ -254,11 +258,31 @@
     font-size:rem-calc(18);
 }
 
+.home-mag--right {
+    .home-mag__img {
+        float:right !important;
+        border-top:1px solid $pearl;
+        padding-top:2em;
+        margin-top:1em;
+
+        @media #{$large-up} {
+            border-top:medium none;
+            padding-top:0;
+            margin-top:0;
+        }
+    }
+}
+
 // focus-on
+.focus-section {
+    background-color:$black2;
+}
 
 .focus-section__title {
     color:$white;
     @extend .text-center;
+    @extend .verlag-bold;
+    text-transform: uppercase;
 }
 .focus-on {
     overflow: hidden;
@@ -330,6 +354,7 @@
 .designers__title {
     @extend .text-center;
     @extend .magazine__title;
+    @extend .verlag-bold;
 }
 .designers__inner {
     @include grid-column(

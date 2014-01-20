@@ -2,7 +2,7 @@
 
 <!-- visual -->
 <section class="top-container">
-    <?php get_template_part('component', 'header'); ?>  
+    <?php get_template_part('component', 'header_home'); ?>  
     <?php get_template_part('home', 'visual'); ?> 
 </section>   
 

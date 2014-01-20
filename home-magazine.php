@@ -2,6 +2,7 @@
     <div class="row">
         <h2 class="magazine__title">magazine</h2>
         <?php       
+            $i = 1;
             $args = array(
                 'posts_per_page' => '2',
                 'order' => 'DESC'
@@ -11,9 +12,17 @@
 
             if ( $mag_query->have_posts() ) {
                 while ( $mag_query->have_posts() ) {
-                    $mag_query->the_post(); ?>
+                    $mag_query->the_post(); 
 
-                <article class="home-mag">
+                    if ($i % 2 == 0) {
+                        echo '<article class="home-mag home-mag--right">';
+                    } else {
+                        echo '<article class="home-mag">';
+                    }
+
+                    ?>
+
+                
                     <div class="home-mag__img">
                         <a href="<?php the_permalink(); ?>">
                             <?php the_post_thumbnail('home-mag__thumb'); ?>
@@ -34,6 +43,7 @@
                 </article>
                     
             <?php
+                $i++;
                 }
             } 
             /* Restore original Post Data */

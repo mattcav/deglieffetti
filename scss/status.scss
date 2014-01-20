@@ -23,18 +23,20 @@
 
 
 .js {
-    .coming.insta-pic {
+    .home {
+        .coming.insta-pic {
             transform:translateY(350px) translateX(250px) rotate(15deg);
             opacity:0;
             transition: all 0.6s ease-in-out 0s;
         }
 
-    .coming.insta-pic:nth-child(odd) {
-        transform:translateY(350px) translateX(-250px) rotate(-15deg);
-        transition: all 0.8s ease-in-out 0s;
-    }
+        .coming.insta-pic:nth-child(odd) {
+            transform:translateY(350px) translateX(-250px) rotate(-15deg);
+            transition: all 0.8s ease-in-out 0s;
+        }
 
-    .come-in.insta-pic {opacity:1;
-        transform:translateY(0) translateX(0) rotate(0deg) !important;
-    }
+        .come-in.insta-pic {opacity:1;
+            transform:translateY(0) translateX(0) rotate(0deg) !important;
+        }
+    }    
 }

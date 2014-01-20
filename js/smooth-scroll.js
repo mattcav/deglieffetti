@@ -131,6 +131,37 @@
 
 			}, false);
 
+		});
+
+		// For each mobile smooth scroll link
+		var mobileScrollToggle = document.querySelectorAll('.scroll-mobile');
+		[].forEach.call(mobileScrollToggle, function (toggle) {
+
+			// When the smooth scroll link is clicked
+			toggle.addEventListener('click', function(e) {
+
+				// Prevent the default link behavior
+				e.preventDefault();
+
+				$('.off-canvas-wrap').removeClass('move-right');
+
+				// Get anchor link and calculate distance from the top
+				var dataID = toggle.getAttribute('href');
+				var dataTarget = document.querySelector(dataID);
+				var dataSpeed = toggle.getAttribute('data-speed');
+				var dataEasing = toggle.getAttribute('data-easing');
+				var dataURL = toggle.getAttribute('data-url');
+
+				// If the anchor exists, scroll to it
+				if (dataTarget) {
+					setTimeout(function(){
+						smoothScroll( dataTarget, dataSpeed || 500, dataEasing || 'easeInOutCubic', dataURL || 'false' );
+					},400);
+				}
+
+			}, false);
+
+		});
 
 	}
 
