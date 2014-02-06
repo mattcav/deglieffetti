@@ -825,19 +825,19 @@
 }
 
 .webp {
-     @media #{$small} {
+     @media #{$small-only} {
         .ccp-attract {
             background-image:url('../images/carol-christian-poell/ccp.webp');
         }
     }
 
-    @media #{$medium} {
+    @media #{$medium-only} {
         .ccp-attract {
             background-image:url('../images/carol-christian-poell/ccp-medium.webp');
         }
     }
 
-    @media #{$large} {
+    @media #{$large-only} {
         .ccp-attract {
             background-image:url('../images/carol-christian-poell/ccp-large.webp');
         }
@@ -851,19 +851,19 @@
 }
 
 .no-webp {
-    @media #{$small} {
+    @media #{$small-only} {
         .ccp-attract {
             background-image:url('../images/carol-christian-poell/ccp.jpg');
         }
     }
 
-    @media #{$medium} {
+    @media #{$medium-only} {
         .ccp-attract {
             background-image:url('../images/carol-christian-poell/ccp-medium.jpg');
         }
     }
 
-    @media #{$large} {
+    @media #{$large-only} {
         .ccp-attract {
             background-image:url('../images/carol-christian-poell/ccp-large.jpg');
         }
@@ -970,10 +970,14 @@
     color:#fff;
     margin-top:3em;
     margin-bottom:1em;
+    padding:0 2em;
+    @media #{$large-up} {
+        padding:0;
+    }
 }
 
 .ccp-desire__grid {
-     @include block-grid(
+    @include block-grid(
     $per-row: 2,
     $spacing: $block-grid-default-spacing,
     $base-style: true
@@ -984,12 +988,21 @@
 }
 .ccp-action__title {
     text-align: center;
+    text-transform: uppercase;
+    @extend .verlag-bold;
 }
+
 .postcard_left--ccp {
+    padding:1em;
+
     @media #{$large-up} {
-        padding-right: 5em;
+        padding: 0 5em 0 0;
+    }
+    .form__title, .form__text {
+        display:none;
     }
 }
+
 // offcanvas
 
 .offcanvas-menu {
@@ -1048,4 +1061,50 @@ a.menu-icon {
     padding-top:5px;
     @extend .verlag-light;
     text-transform: uppercase;
+}
+
+// alaia
+
+.ala-attract {
+    align-items: center;
+    background-color: #353535;
+    background-image: url("../images/alaia/pattern-ala3.svg"), url("../images/alaia/pattern-ala3.svg");
+    background-position: center 6%, center 94%;
+    background-repeat: repeat-x;
+    display: flex;
+    height: 65vh;
+    justify-content: center;
+}
+.ala-attract__header {
+    text-align: center;
+}
+.ala-attract__title {
+    text-transform: uppercase;
+    color:$white;
+    @extend .verlag-light;
+    letter-spacing:1rem;
+    font-size:rem-calc(72);
+}
+
+.ala-interest {
+    @extend %section;
+}
+
+.ala-interest__title {
+    text-align: center;
+    img {
+        max-width: 50%;
+    }
+}
+
+.ala-desire {
+    @extend %section;
+}
+
+.ala-desire__grid {
+    @include block-grid(
+    $per-row: 2,
+    $spacing: $block-grid-default-spacing,
+    $base-style: true
+    );
 }

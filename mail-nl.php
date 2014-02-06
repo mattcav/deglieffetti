@@ -4,15 +4,20 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POS
     $email = $_POST['email'];
     $name = $_POST['name'];
 
-    $to = 'matteo.cavucci@gmail.com';
+    $to = 'matteo.cavucci@gmail.com, shop@deglieffetti.eu';
 
     $subject = '[deglieffetti.eu] messaggio da ' .$name;
-    $msg = 'Messaggio da deglieffetti.eu/paul-harnden '. $name . ' Per contattarlo, rispondi a: ' .$email. ' || ';
-    $msg .=' Testo del messaggio: Hello Degli Effetti, I want to get some informations about Paul Harnden from you. Please, contact me at ' .$email.'. Sincerely, '.$name;
+    $msg = 'Messaggio da deglieffetti.eu/paul-harnden <strong>'. $name . '</strong><br> Per contattarlo, rispondi a: <strong>' .$email. '</strong><br><br> ';
+    $msg .=' Testo del messaggio: Hello Degli Effetti, I want to get some informations about Paul Harnden from you. Please, contact me at <strong>' .$email.'</strong>. Sincerely, <strong>'.$name. '</strong>';
 
 
-    $headers = "Website <noreply@deglieffetti.eu>";
-    $headers .= "\r\nReply-To:" .$email;
+    
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= 'From: deglieffetti.eu <noreply@deglieffetti.eu>' . "\r\n";
+
+    $headers .= "Reply-To:" .$email. "\r\n";
+    $headers .= "X-Mailer: PHP/".phpversion(). "\r\n";
 
     if(mail($to, $subject, $msg, $headers)){
             echo 'mail successful send';

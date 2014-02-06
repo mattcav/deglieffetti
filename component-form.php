@@ -14,7 +14,7 @@
 
             <div class="large-12 columns nascondi-label">
                 <label>Your email</label>
-                <input id="email" type="email" class="form__input" placeholder="Email">
+                <input id="email" type="email" class="form__input" placeholder="yourmail@example.com">
             </div>
         </div>
 
@@ -29,7 +29,7 @@
             <div class="small-12 columns">
                 <label for="checkbox1" class="aria-sopra-sotto"><input type="checkbox" id="checkbox1" checked="checked" required><span class="custom checkbox"></span> I Accept the <a target="_blank" href="<?php bloginfo('url'); ?>/privacy-policy/">Privacy Policy</a></label>
 
-                <input id="mfp-title" type="hidden" value="inquire">
+                <input id="mfp-title" type="hidden" value="Carol Christian Poell Page">
                 
                 <input type="hidden" name="action" value="form_submit">
 
