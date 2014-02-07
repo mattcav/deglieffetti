@@ -754,7 +754,6 @@
 
 // postcard
 .postcard {
-    @extend .bg-pearl;
     float:none;
     overflow: hidden;
     max-width: 64rem;
@@ -770,6 +769,10 @@
     @media #{$large-up} {
         margin:0 auto 10em;
     }
+}
+
+.postcard--ph {
+    @extend .bg-pearl;
 }
 
 .postcard__logo {
@@ -1064,7 +1067,27 @@ a.menu-icon {
 }
 
 // alaia
+.post-template-designer-alaia-php {
+    height:100%;
 
+    .off-canvas-wrap {
+        height:100%;  
+        overflow-y: scroll;
+        background-color:$black2;
+    }
+    .inner-wrap {
+        background-color:$black2;
+        height:100%;
+    }
+
+    .banner {
+        float:left;
+        width:100%;
+    }
+}
+.ala-title {
+    border-bottom:1px solid;
+}
 .ala-attract {
     align-items: center;
     background-color: #353535;
@@ -1072,11 +1095,48 @@ a.menu-icon {
     background-position: center 6%, center 94%;
     background-repeat: repeat-x;
     display: flex;
-    height: 65vh;
+    //height:350px;
+    height: 75%;
     justify-content: center;
+    position:relative;
+    @media #{$medium-up} {
+        justify-content: space-around;
+    }
+    @media #{$large-up} {
+        background-size: 74% auto;
+        height: 90%;
+    }
+}
+.ala-dress {
+    @include position(absolute, top 0.5rem left 25%);
+    margin-left: 0;
+    z-index: 100;
+    //height:15%;
+    height:150%;
+    @media #{$medium-up} {
+        left:0;
+        height:250%;
+        //height:35%;
+    }
+    @media #{$large-up} {
+        //height: 40%;
+        height:290%;
+        left: 0;
+        margin-left: 0;
+        top: 2em;
+    }
+}
+.ala-dress__path {
+    position:relative;
+    z-index: 100;
+}
+.ala-path--1 {
+    z-index:110;
 }
 .ala-attract__header {
     text-align: center;
+    position:relative;
+    z-index:1000;
 }
 .ala-attract__title {
     text-transform: uppercase;
@@ -1088,10 +1148,75 @@ a.menu-icon {
 
 .ala-interest {
     @extend %section;
+    z-index:105;
+    @media #{$medium-up} {
+        background-color:$black2;
+    }
+    @media #{$large-up} {
+        @include grid-column(
+            $columns:8,
+            $collapse:true,
+            $float:right
+        );
+    }
 }
 
+.ala-interest__container {
+    overflow: hidden;
+    background-color:$white;
+    @media #{$medium-up} {
+        display: flex;
+        justify-content: center;
+        @include grid-column(
+        $columns:11,
+        $collapse:true,
+        $center:true
+        );
+    }
+    @media #{$large-up} {
+        @include grid-column(
+        $columns:12,
+        $collapse:true,
+        $center:false,
+        $float:right
+        );
+    }
+}
+.ala-interest__figure {
+    margin:0;
+    @include grid-column(
+        $columns:9,
+        $collapse:true
+    );
+    @media #{$medium-up} {
+        @include grid-column(
+        $columns:6,
+        $collapse:true
+        );
+    }
+}
+.ala-interest__inner {
+    overflow: hidden;
+    max-width: 24rem;
+    padding:3em 1em;
+    @include grid-column(
+        $columns:11,
+        $center:true
+        );
+    @media #{$medium-up} {
+        align-self: center;
+        @include grid-column(
+        $columns:6
+        );
+    }
+}
 .ala-interest__title {
+    @extend .ala-title;
     text-align: center;
+    text-transform: uppercase;
+    font-size:rem-calc(44);
+    @extend .verlag-light;
+
     img {
         max-width: 50%;
     }
@@ -1099,12 +1224,68 @@ a.menu-icon {
 
 .ala-desire {
     @extend %section;
+    background-color:$black2;
+    padding:3em 0;
 }
-
+.ala-desire__title {
+    color:$white;
+    font-size:rem-calc(20);
+    margin-bottom:1em;
+    padding-bottom:0.5em;
+    @extend .ala-title;
+    @extend .verlag-light;
+    text-transform: uppercase;
+    text-align: center;
+    position:relative;
+    z-index:101;
+    @media #{$medium-up} {
+        font-size:rem-calc(36);
+    }
+}
 .ala-desire__grid {
     @include block-grid(
     $per-row: 2,
     $spacing: $block-grid-default-spacing,
     $base-style: true
     );
+    @media #{$medium-up} {
+    @include block-grid(
+        $per-row: 3,
+        $spacing: $block-grid-default-spacing,
+        $base-style: true
+    );
+    }
 }
+.ala-desire__img {
+     @media #{$large-up} {
+        border:1.5rem solid $white;
+     }
+}
+
+.ala-desire__title-container {
+    padding-top:8% !important;
+}
+
+.ala-desire__pic {
+    position:relative;
+    z-index:101;
+}
+.ala-action {
+    @extend .ala-desire;
+    @extend %section;
+    padding:3em 0;
+}
+.ala-action__title {
+    @extend .ala-desire__title;
+    @extend .verlag-light;
+
+    font-size:rem-calc(36);
+}
+
+.postcard--ala {
+    background:$white;
+    @include grid-column(
+        $columns:11,
+        $center:true
+    );
+} 

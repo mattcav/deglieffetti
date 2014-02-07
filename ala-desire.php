@@ -1,10 +1,15 @@
 <section id="desire" class="ala-desire">
     <div class="row">
-        <h2 class="ala-desire__title">
-            latest arrivals in our boutique
-        </h2>   
+       <!--  <h2 class="ala-desire__title">
+            latest arrivals in our&nbsp;boutique
+        </h2>   --> 
         
         <ul class="ala-desire__grid">
+        <li class="ala-desire__title-container">
+            <h2 class="ala-desire__title">
+                latest arrivals in&nbsp;boutique
+            </h2>
+        </li>
             <?php
                 $url = "https://api.instagram.com/v1/users/43094411/media/recent/?access_token=43094411.cd30472.f80c2942615d42bcaaf4511649ac8687&count=-1";
                 $curl = curl_init($url);
@@ -26,6 +31,9 @@
                     }
                 }
             ?>
+            <li class="ala-desire__logo">
+                <img src="<?php bloginfo('template_directory'); ?>/images/alaia/logo-ala.svg" alt="Alaia Brand">
+            </li>
         </ul>
     </div>
   </section>

@@ -194,6 +194,8 @@
             var isr = '&#201; is required';
             var name = $('#username').val();
             var email = $('#email').val();
+            var designer = $('#nl-designer').val();
+
 
             if (name.length<1) {
                 valid += '<li id="form-error__name"> We need to know your name.</li>';
@@ -207,9 +209,9 @@
                 response.html('<ul id="form__errors" class="lista">'+valid+'</ul>');
             } else {
 
-            var dataString = 'name='+ name + '&email=' + email +'&action=form_submit';
+            var dataString = 'name='+ name + '&email=' + email +'&designer=' + designer +'&action=form_submit';
             
-            response.html('Sending …. ');
+            response.html('Sending… ');
             response.fadeIn('slow');
             setTimeout ( function() { send(dataString); }, 2000);
                 

@@ -40,3 +40,44 @@
         }
     }    
 }
+
+body {
+    transition: all 0.5s ease-in-out 0.1s;
+}
+
+.js {
+    color:$white;
+    background:$black;
+    body {
+        opacity:0;
+
+        &.ready {
+            opacity:1;   
+        }
+    }
+}
+
+.ala-dress {
+    opacity:1;
+    transition: all 0.8s ease-in-out 0s;
+}
+.ala-dress--filled {
+    opacity:0;
+}
+
+.dress-ready {
+    .ala-dress {
+        opacity:0;
+    }
+    .ala-dress--filled {
+        opacity:1;
+    }
+}
+
+.ala-desire__img {
+    transition: all 0.8s ease-in-out 0s;
+    &:hover {
+        border:0rem solid;
+    }
+}
+

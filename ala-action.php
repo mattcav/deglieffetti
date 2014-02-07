@@ -1,7 +1,7 @@
-<section id="ph-action" class="ph-action">
+<section id="ala-action" class="ala-action">
     <div class="row">
-        <h2 class="ph-action__title">send a message</h2>
-        <div class="postcard postcard--ph">
+        <h2 class="ala-action__title">send a message</h2>
+        <div class="postcard postcard--ala">
             <section class="postcard__left">
                 <?php get_template_part('component', 'nat_form'); ?>
             </section>
