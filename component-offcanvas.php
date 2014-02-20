@@ -7,6 +7,9 @@
         <li class="offcanvas-menu__item">
             <a class="offcanvas-menu__link" href="<?php bloginfo('url'); ?>/latest-arrivals/">latest arrivals</a>
         </li>
+         <li class="offcanvas-menu__item">
+            <a class="offcanvas-menu__link" href="<?php bloginfo('url'); ?>/focus-on/">focus on</a>
+        </li>
         <li class="offcanvas-menu__item">
             <a class="offcanvas-menu__link" href="<?php bloginfo('url'); ?>/magazine/">magazine</a>
         </li>

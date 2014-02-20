@@ -18,4 +18,4 @@ get_header(); ?>
 
 <?php get_template_part('component', 'footer'); ?>
 
-<?php get_template_part('ala', 'footer'); ?>
+<?php get_template_part('cel', 'footer'); ?>

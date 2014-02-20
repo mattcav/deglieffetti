@@ -332,7 +332,7 @@
     margin-bottom: 1em;
 }
 
-.focus-on:nth-child(2) {
+.focus-on:nth-child(odd) {
     .focus-on__figure {
         @media #{$large-up} {
             float:right;
@@ -1103,7 +1103,7 @@ a.menu-icon {
         justify-content: space-around;
     }
     @media #{$large-up} {
-        background-size: 74% auto;
+        background-size: 64% auto;
         height: 90%;
     }
 }
@@ -1293,8 +1293,13 @@ a.menu-icon {
 // celine
 
 .cel-interest {
+    background-color:$white;
     @extend %section;
-    padding:5em 0;
+    padding:3em 0 5em;
+
+    @media #{$medium-up} {
+        padding:5em 0;
+    }
 }
 .cel-interest__inner {
     @include grid-column(
@@ -1337,6 +1342,7 @@ a.menu-icon {
     }
 }
 .cel-desire {
+    background-color:$white;
     @extend %section;
     padding:0 1rem;
 }
@@ -1360,7 +1366,12 @@ a.menu-icon {
         );
     }
 }
-
+.cel-action {
+    background-color:$white;
+    clear:both;
+    float:none;
+    padding-top:5rem;
+}
 .cel-action__title {
     @extend .verlag-light;
     @extend .cel-interest__title;

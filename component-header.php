@@ -20,6 +20,9 @@
                     <a class="visible-menu__link" href="<?php bloginfo('url'); ?>/latest-arrivals/">latest arrivals</a>
                 </li>
                 <li class="visible-menu__item">
+                    <a class="visible-menu__link" href="<?php bloginfo('url'); ?>/focus-on/">focus on</a>
+                </li>
+                <li class="visible-menu__item">
                     <a class="visible-menu__link" href="<?php bloginfo('url'); ?>/magazine/">magazine</a>
                 </li>
                 <li class="visible-menu__item">

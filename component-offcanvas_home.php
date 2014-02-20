@@ -8,6 +8,9 @@
             <a class="scroll-mobile offcanvas-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#social">latest arrivals</a>
         </li>
         <li class="offcanvas-menu__item">
+            <a class="scroll-mobile offcanvas-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#focus-section">focus on</a>
+        </li>
+        <li class="offcanvas-menu__item">
             <a class="scroll-mobile offcanvas-menu__link" data-speed="500" data-easing="easeInOutCubic" data-url="true" href="#magazine">magazine</a>
         </li>
         <li class="offcanvas-menu__item">
