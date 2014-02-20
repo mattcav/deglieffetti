@@ -81,3 +81,14 @@ body {
     }
 }
 
+.circle-to-square {
+    img {
+        border-radius:50%;
+        transition: all 0.3s ease-in-out 0s;
+    }
+    &:hover, &:active, &:focus {
+        img {
+            border-radius:0%;
+        }
+    }
+}
